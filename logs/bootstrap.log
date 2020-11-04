@@ -1,0 +1,19 @@
+2020-11-04T14:23:30.513Z	INFO	cmd/root.go:98	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T14:24:56.036Z	WARN	cmd/root.go:45	Caught signal, terminating	{"signal": "interrupt"}
+2020-11-04T14:24:58.241Z	INFO	cmd/root.go:98	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T14:25:11.498Z	WARN	cmd/root.go:45	Caught signal, terminating	{"signal": "interrupt"}
+2020-11-04T14:25:47.375Z	INFO	cmd/root.go:98	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T14:27:15.009Z	INFO	cmd/root.go:98	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T14:30:15.912Z	INFO	cmd/root.go:98	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T14:31:20.842Z	INFO	echo/main.go:17	Starting server
+2020-11-04T14:31:24.585Z	INFO	echo/main.go:33	Starting echo server on port: 8080
+2020-11-04T14:43:26.082Z	INFO	cmd/root.go:96	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T14:43:32.266Z	INFO	echo/main.go:23	Starting server
+2020-11-04T14:43:32.266Z	INFO	echo/main.go:39	Starting echo server on port: 8080
+2020-11-04T14:44:54.055Z	INFO	cmd/root.go:96	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T14:45:04.674Z	INFO	echo/main.go:23	Starting server
+2020-11-04T14:45:04.675Z	INFO	echo/main.go:39	Starting echo server on port: 8080
+2020-11-04T14:54:25.686Z	INFO	cmd/root.go:92	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T17:43:09.254Z	INFO	cmd/root.go:91	using configuration	{"file-path": "/home/tanq/code/bl/oakenfield/go/service-bootstrap/config/configuration.yaml"}
+2020-11-04T17:43:09.254Z	INFO	echo/main.go:26	Starting server
+2020-11-04T17:43:09.254Z	INFO	echo/main.go:45	Starting echo server on port: 8080

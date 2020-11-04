@@ -1,10 +1,9 @@
-package strings_test
+package strings
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
-
-	"github.com/birchwood-langham/go-toolkit/io/strings"
 )
 
 func TestStripMargin(t *testing.T) {
@@ -49,7 +48,7 @@ func TestStripMargin(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		got := strings.StripMargin(tc.input, tc.margin)
+		got := StripMargin(tc.input, tc.margin)
 		if tc.want != got {
 			t.Errorf("StripMargin - want: %q but got: %q", tc.want, got)
 		}
@@ -75,7 +74,7 @@ func TestSplitAndTrimSpace(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotOutput := strings.SplitAndTrimSpace(tt.args.input, tt.args.sep)
+			gotOutput := SplitAndTrimSpace(tt.args.input, tt.args.sep)
 
 			if len(gotOutput) == 0 && len(tt.wantOutput) == 0 {
 				return
@@ -125,7 +124,7 @@ func TestToCsv(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := strings.ToCsv(tt.args.sep, tt.args.in...); got != tt.want {
+			if got := ToCsv(tt.args.sep, tt.args.in...); got != tt.want {
 				t.Errorf("ToCsv() = %v, want %v", got, tt.want)
 			}
 		})
@@ -135,7 +134,7 @@ func TestToCsv(t *testing.T) {
 func TestToQuotedCsv(t *testing.T) {
 	type args struct {
 		sep   rune
-		quote strings.QuoteType
+		quote QuoteMark
 		in    []string
 	}
 	tests := []struct {
@@ -147,7 +146,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "single-item-comma-separated-double-quoted",
 			args: args{
 				sep:   ',',
-				quote: strings.DoubleQuote,
+				quote: DoubleQuote,
 				in:    []string{"Test"},
 			},
 			want: `"Test"`,
@@ -156,7 +155,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "multiple-items-comma-separated-double-quoted",
 			args: args{
 				sep:   ',',
-				quote: strings.DoubleQuote,
+				quote: DoubleQuote,
 				in:    []string{"This", "is", "a", "test"},
 			},
 			want: `"This","is","a","test"`,
@@ -165,7 +164,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "single-item-comma-separated-single-quoted",
 			args: args{
 				sep:   ',',
-				quote: strings.SingleQuote,
+				quote: SingleQuote,
 				in:    []string{"Test"},
 			},
 			want: `'Test'`,
@@ -174,7 +173,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "multiple-items-comma-separated-single-quoted",
 			args: args{
 				sep:   ',',
-				quote: strings.SingleQuote,
+				quote: SingleQuote,
 				in:    []string{"This", "is", "a", "test"},
 			},
 			want: `'This','is','a','test'`,
@@ -183,7 +182,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "single-item-tab-separated-double-quoted",
 			args: args{
 				sep:   '\t',
-				quote: strings.DoubleQuote,
+				quote: DoubleQuote,
 				in:    []string{"Test"},
 			},
 			want: `"Test"`,
@@ -192,7 +191,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "multiple-items-tab-separated-double-quoted",
 			args: args{
 				sep:   '\t',
-				quote: strings.DoubleQuote,
+				quote: DoubleQuote,
 				in:    []string{"This", "is", "a", "test"},
 			},
 			want: "\"This\"\t\"is\"\t\"a\"\t\"test\"",
@@ -201,7 +200,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "single-item-tab-separated-single-quoted",
 			args: args{
 				sep:   '\t',
-				quote: strings.SingleQuote,
+				quote: SingleQuote,
 				in:    []string{"Test"},
 			},
 			want: `'Test'`,
@@ -210,7 +209,7 @@ func TestToQuotedCsv(t *testing.T) {
 			name: "multiple-items-tab-separated-single-quoted",
 			args: args{
 				sep:   '\t',
-				quote: strings.SingleQuote,
+				quote: SingleQuote,
 				in:    []string{"This", "is", "a", "test"},
 			},
 			want: "'This'\t'is'\t'a'\t'test'",
@@ -218,9 +217,24 @@ func TestToQuotedCsv(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := strings.ToQuotedCsv(tt.args.sep, tt.args.quote, tt.args.in...); got != tt.want {
+			if got := ToQuotedCsv(tt.args.sep, tt.args.quote, tt.args.in...); got != tt.want {
 				t.Errorf("ToQuotedCsv() = %v, want %v", got, tt.want)
 			}
 		})
 	}
+}
+
+func ExampleToCSV() {
+	fmt.Print(ToCsv(',', "This", "is", "a", "test"))
+	// Output: This,is,a,test
+}
+
+func ExampleToQuotedCsv_Single() {
+	fmt.Print(ToQuotedCsv(',', SingleQuote, "This", "is", "a", "test"))
+	// Output: 'This','is','a','test'
+}
+
+func ExampleToQuoteCsv_Double() {
+	fmt.Print(ToQuotedCsv(',', DoubleQuote, "This", "is", "a", "test"))
+	// Output: "This","is","a","test"
 }

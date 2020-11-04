@@ -3,7 +3,7 @@ package fs_test
 import (
 	"testing"
 
-	"github.com/birchwood-langham/go-toolkit/io/fs"
+	"gitlab.com/bl-go/service-bootstrap/pkg/io/fs"
 )
 
 func Test_ListFiles(t *testing.T) {

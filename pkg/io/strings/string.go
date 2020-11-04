@@ -90,11 +90,6 @@ func ToCsv(sep rune, in ...string) string {
 	return b.String()
 }
 
-func ExampleToCSV() {
-	ToCsv(',', "This", "is", "a", "test")
-	// Output: This,is,a,test
-}
-
 type QuoteMark rune
 
 const SingleQuote QuoteMark = '\''
@@ -116,14 +111,4 @@ func ToQuotedCsv(sep rune, quote QuoteMark, in ...string) string {
 	}
 
 	return b.String()
-}
-
-func ExampleToQuotedCsv_Single() {
-	ToQuotedCsv(',', SingleQuote, "This", "is", "a", "test")
-	// Output: 'This','is','a','test'
-}
-
-func ExampleToQuoteCsv_Double() {
-	ToQuotedCsv(',', DoubleQuote, "This", "is", "a", "test")
-	// Output: "This","is","a","test"
 }

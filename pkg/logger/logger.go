@@ -7,8 +7,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/birchwood-langham/web-service-bootstrap/config"
 	"github.com/spf13/viper"
+	"gitlab.com/bl-go/service-bootstrap/pkg/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"

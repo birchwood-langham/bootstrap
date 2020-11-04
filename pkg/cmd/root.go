@@ -1,25 +1,29 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"math"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/birchwood-langham/go-toolkit/io/strings"
-	"github.com/birchwood-langham/web-service-bootstrap/service"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"gitlab.com/bl-go/service-bootstrap/pkg/logger"
 	"go.uber.org/zap"
+
+	"gitlab.com/bl-go/service-bootstrap/pkg/io/strings"
+	"gitlab.com/bl-go/service-bootstrap/pkg/logger"
+	"gitlab.com/bl-go/service-bootstrap/pkg/service"
 )
 
 var cfgFile string
-var application service.Application
 var log *zap.Logger
+var ctx context.Context
+var app service.Application
+var state service.StateStore
 
-var Root = &cobra.Command{
+var RootCmd = &cobra.Command{
 	Run: startService,
 }
 
@@ -28,7 +32,7 @@ func MaxPort() int {
 }
 
 func startService(cmd *cobra.Command, args []string) {
-	if err := application.Init(); err != nil {
+	if err := app.Init(ctx, state); err != nil {
 		log.Fatal("could not initialize the application", zap.Error(err))
 	}
 
@@ -39,7 +43,7 @@ func startService(cmd *cobra.Command, args []string) {
 
 	log.Warn("Caught signal, terminating", zap.String("signal", incoming.String()))
 
-	if err := application.Cleanup(); err != nil {
+	if err := app.Cleanup(); err != nil {
 		log.Fatal("could not execute cleanup", zap.Error(err))
 	}
 }
@@ -48,7 +52,7 @@ func init() {
 	log = logger.ConsoleLogger()
 	cobra.OnInitialize(initConfig)
 
-	Root.PersistentFlags().StringVar(&cfgFile, "config", "", "configuration file to use for the service")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "configuration file to use for the service")
 }
 
 func initConfig() {
@@ -93,5 +97,22 @@ func setupLogger() {
 }
 
 func AddCommand(commands ...*cobra.Command) {
-	Root.AddCommand(commands...)
+	RootCmd.AddCommand(commands...)
+}
+
+// Execute adds all child commands to the root command and sets flags appropriately.
+// This is called by main.main(). It only needs to happen once to the rootCmd.
+func Execute(c context.Context, a service.Application, s service.StateStore) {
+	ctx = c
+	app = a
+	state = s
+
+	RootCmd.Use = service.Usage
+	RootCmd.Short = service.ShortDescription
+	RootCmd.Long = service.LongDescription
+
+	if err := RootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }

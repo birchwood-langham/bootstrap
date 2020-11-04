@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/birchwood-langham/web-service-bootstrap/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"gitlab.com/bl-go/service-bootstrap/pkg/config"
 )
 
 var Version = &cobra.Command{
