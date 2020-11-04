@@ -1,4 +1,4 @@
-module gitlab.com/bl-go/service-bootstrap
+module github.com/birchwood-langham/bootstrap/v1
 
 go 1.14
 

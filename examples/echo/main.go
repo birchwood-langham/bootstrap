@@ -9,9 +9,9 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"go.uber.org/zap"
 
-	"gitlab.com/bl-go/service-bootstrap/pkg/cmd"
-	"gitlab.com/bl-go/service-bootstrap/pkg/logger"
-	"gitlab.com/bl-go/service-bootstrap/pkg/service"
+	"github.com/birchwood-langham/bootstrap/v1/pkg/cmd"
+	"github.com/birchwood-langham/bootstrap/v1/pkg/logger"
+	"github.com/birchwood-langham/bootstrap/v1/pkg/service"
 )
 
 const (

@@ -12,9 +12,9 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
-	"gitlab.com/bl-go/service-bootstrap/pkg/io/strings"
-	"gitlab.com/bl-go/service-bootstrap/pkg/logger"
-	"gitlab.com/bl-go/service-bootstrap/pkg/service"
+	"github.com/birchwood-langham/bootstrap/v1/pkg/io/strings"
+	"github.com/birchwood-langham/bootstrap/v1/pkg/logger"
+	"github.com/birchwood-langham/bootstrap/v1/pkg/service"
 )
 
 var cfgFile string

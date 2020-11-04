@@ -1,14 +1,6 @@
 version: 0.1.0
 service:
     name: bootstrap
-    usage: | 
-        Provide usage information for your application
-    short: | 
-        Give a short description about what the application does
-    long: | 
-        Give a longer description about what the application does
-        and provide additional information about what parameters can be
-        passed to your application
 log:
     filepath: ./logs/bootstrap.log
     level: DEBUG

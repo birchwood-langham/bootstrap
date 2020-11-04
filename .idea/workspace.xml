@@ -2,18 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e73a28a8-a0fd-4f4d-bd75-6e6aa79fc701" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/configuration.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/configuration.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/echo/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/echo/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/cmd/root.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/cmd/version.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/cmd/version.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/db/pg/pg.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/db/pg/pg.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/errors/errors.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/errors/errors.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/io/fs/fs_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/io/fs/fs_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/io/strings/strings.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/io/strings/strings_test.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/logger/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/logger/logger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/service/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/service/application.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

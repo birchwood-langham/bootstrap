@@ -8,10 +8,11 @@ import (
 	"sync"
 
 	"github.com/spf13/viper"
-	"gitlab.com/bl-go/service-bootstrap/pkg/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
+
+	"github.com/birchwood-langham/bootstrap/v1/pkg/config"
 )
 
 var once sync.Once
