@@ -88,7 +88,7 @@ func initConfig() {
 
 	setupLogger()
 
-	log.Info("using configuration", zap.String("file-path", viper.ConfigFileUsed()))
+	log.Debug("using configuration", zap.String("file-path", viper.ConfigFileUsed()))
 }
 
 func setupLogger() {
