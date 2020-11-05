@@ -20,6 +20,12 @@ const (
 	long  = `echo service echos whatever it is given`
 )
 
+type echoState struct {
+	service.StateStore
+}
+
+var state *echoState
+
 func initHttp(ctx context.Context, state service.StateStore) error {
 	log := logger.New(logger.ApplicationLogLevel(), logger.ConfiguredLumberjackLogger())
 
@@ -56,6 +62,7 @@ func main() {
 		AddInitFunc(initHttp)
 
 	app.SetProperties(usage, short, long)
+	state = &echoState{}
 
-	cmd.Execute(context.Background(), app, service.NewStateStore())
+	cmd.Execute(context.Background(), app, state)
 }

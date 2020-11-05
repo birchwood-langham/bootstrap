@@ -5,7 +5,7 @@ import (
 )
 
 type InitFunc func(ctx context.Context, state StateStore) error
-type CleanupFunc func() error
+type CleanupFunc func(state StateStore) error
 
 type Application struct {
 	initFunctions    []InitFunc
@@ -34,9 +34,9 @@ func (a Application) AddInitFunc(initFuncs ...InitFunc) Application {
 	return a
 }
 
-func (a Application) Cleanup() error {
+func (a Application) Cleanup(state StateStore) error {
 	for _, f := range a.cleanupFunctions {
-		if err := f(); err != nil {
+		if err := f(state); err != nil {
 			return err
 		}
 	}
@@ -50,5 +50,5 @@ func (a Application) AddCleanupFunc(fns ...CleanupFunc) Application {
 }
 
 func (a Application) SetProperties(usage, shortDesc, longDesc string) {
-	SetProperties(usage, shortDesc, longDesc)
+	SetCliProperties(usage, shortDesc, longDesc)
 }

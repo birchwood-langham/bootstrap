@@ -43,7 +43,7 @@ func startService(cmd *cobra.Command, args []string) {
 
 	log.Warn("Caught signal, terminating", zap.String("signal", incoming.String()))
 
-	if err := app.Cleanup(); err != nil {
+	if err := app.Cleanup(state); err != nil {
 		log.Fatal("could not execute cleanup", zap.Error(err))
 	}
 }
