@@ -29,7 +29,7 @@ go mod init my-go-webapp
 
 Use go get to add this project as a dependency to your Go module
 ```bash
-go get github.com/birchwood-langham/bootstrap/v1
+go get -u github.com/birchwood-langham/bootstrap
 ```
 
 ### Init and cleanup functions
