@@ -1,4 +1,4 @@
-module github.com/birchwood-langham/bootstrap/v1
+module github.com/birchwood-langham/bootstrap
 
 go 1.14
 

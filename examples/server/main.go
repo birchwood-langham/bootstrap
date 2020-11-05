@@ -6,9 +6,9 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/birchwood-langham/bootstrap/v1/pkg/cmd"
-	"github.com/birchwood-langham/bootstrap/v1/pkg/logger"
-	"github.com/birchwood-langham/bootstrap/v1/pkg/service"
+	"github.com/birchwood-langham/bootstrap/pkg/cmd"
+	"github.com/birchwood-langham/bootstrap/pkg/logger"
+	"github.com/birchwood-langham/bootstrap/pkg/service"
 )
 
 type serverState struct {

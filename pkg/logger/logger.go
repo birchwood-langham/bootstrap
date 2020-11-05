@@ -12,7 +12,7 @@ import (
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 
-	"github.com/birchwood-langham/bootstrap/v1/pkg/config"
+	"github.com/birchwood-langham/bootstrap/pkg/config"
 )
 
 var once sync.Once
