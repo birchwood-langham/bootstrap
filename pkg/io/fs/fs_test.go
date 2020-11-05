@@ -3,7 +3,7 @@ package fs_test
 import (
 	"testing"
 
-	"github.com/birchwood-langham/bootstrap/v1/pkg/io/fs"
+	"github.com/birchwood-langham/bootstrap/pkg/io/fs"
 )
 
 func Test_ListFiles(t *testing.T) {

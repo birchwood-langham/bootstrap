@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/birchwood-langham/bootstrap/v1/pkg/config"
+	"github.com/birchwood-langham/bootstrap/pkg/config"
 )
 
 var Version = &cobra.Command{
