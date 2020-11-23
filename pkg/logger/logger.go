@@ -60,7 +60,7 @@ func ZapCore() (zapcore.Core, error) {
 	return core, nil
 }
 
-func New(level zapcore.Level, writer io.Writer) *zap.Logger {
+func Get(level zapcore.Level, writer io.Writer) *zap.Logger {
 	once.Do(func() {
 		core = zapcore.NewCore(ZapEncoder(), ZapWriter(writer), level)
 		log = zap.New(core, zap.AddCaller())
@@ -71,6 +71,11 @@ func New(level zapcore.Level, writer io.Writer) *zap.Logger {
 	}()
 
 	return log
+}
+
+func New(level zapcore.Level, writer io.Writer) *zap.Logger {
+	core := zapcore.NewCore(ZapEncoder(), ZapWriter(writer), level)
+	return zap.New(core, zap.AddCaller())
 }
 
 func ConfiguredLumberjackLogger() *lumberjack.Logger {

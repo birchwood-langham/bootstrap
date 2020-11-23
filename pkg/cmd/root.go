@@ -92,7 +92,7 @@ func initConfig() {
 }
 
 func setupLogger() {
-	log = logger.New(logger.ApplicationLogLevel(), logger.ConfiguredLumberjackLogger())
+	log = logger.Get(logger.ApplicationLogLevel(), logger.ConfiguredLumberjackLogger())
 	zap.ReplaceGlobals(log)
 }
 
