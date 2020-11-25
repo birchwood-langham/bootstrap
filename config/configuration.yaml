@@ -5,6 +5,6 @@ log:
     filepath: ./logs/bootstrap.log
     level: DEBUG
     max-size: 100
-    max-backup: 5
+    max-backups: 5
     max-age: 30
     compress: false
