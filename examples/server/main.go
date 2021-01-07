@@ -20,7 +20,7 @@ type serverState struct {
 var state *serverState
 
 func initApp(ctx context.Context, store service.StateStore) error {
-	log := logger.New(logger.ApplicationLogLevel(), logger.ConfiguredLumberjackLogger())
+	log := logger.Get(logger.ApplicationLogLevel(), logger.ConfiguredLumberjackLogger())
 
 	ss := store.(*serverState)
 
