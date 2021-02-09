@@ -73,6 +73,33 @@ The configuration file must be called configuration.<ext> where ext is any forma
 
 You can add your own configuration to the file and access them using viper.
 
+#### Binding with environment variables
+
+You can bind any settings in the configuration file to environment variables by calling the `service.SetEnvVarBinding` function for each configuration,
+before calling the `service.BindEnvVars`.
+
+```go
+package main
+
+import "github.com/birchwood-langham/bootstrap/pkg/service"
+
+var envVars = map[string]string{
+	"service.address":         "SERVICE_ADDRESS",
+	"request.default-timeout": "REQUEST_DEFAULT_TIMEOUT",
+}
+
+func main() {
+	for k, v := range envVars {
+		service.SetEnvVarBinding(k, v)
+	}
+	
+	service.BindEnvVars("myapp")
+}
+```
+
+On your server, you can set the environment variables MYAPP_SERVICE_ADDRESS and MYAPP_REQUEST_DEFAULT_TIMEOUT to override any configuration found in the configuration
+file.
+
 ### CLI commands
 
 To add your own CLI commands, you can just create a command, and add them before calling the `cmd.Execute()` function. For example:
