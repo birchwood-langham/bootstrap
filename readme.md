@@ -124,6 +124,65 @@ func main() {
 }
 ```
 
+### Run Function
+
+If you want the main application to perform a task and then exit immediately without running as a server, you can set the RunFunction of the Application. The RunFunc type
+is defined as:
+
+```go
+package service 
+
+import (
+	"context"
+)
+type StateStore interface{}
+type RunFunc func(context.Context, StateStore) error
+```
+
+Define your function as you would any other Go function and pass it to the Application using `WithRunFunc`
+
+```go
+package main
+
+import (
+	"context"
+)
+
+func myInitFunc(ctx context.Context, state service.StateStore) error {
+	return nil
+}
+
+func myCleanupFunc(state service.StateStore) error {
+	return nil
+}
+
+func myRunFunc(ctx context.Context, state service.StateStore) error {
+	// Your function defined here 
+	return nil
+}
+
+type appState struct {
+	// state you want to store for your application
+}
+
+func main() {
+    app := service.NewApplication().
+        AddInitFunc(myInitFunc).
+        AddCleanupFunc(myCleanupFunc).
+        WithRunFunc(myRunFunc)
+    
+    state := appState{}
+    
+    cmd.Execute(context.Background(), app, state)
+}
+ 
+```
+
+With the RunFunc function, the application will perform the initialization, execute the run function and then perform the cleanup.
+
+If the RunFunc function is not defined, then the application will run the initialization and wait for an interrupt signal to stop the
+application. Once it receives the interrupt signal, it will perform the cleanup and exit.
+
 ## Configuration
 
 To make accessing configuration easier, a configuration wrapper function is available in the `github.com/birchwood-langham/bootstrap/v1/pkg/config`
@@ -181,5 +240,91 @@ configuration is not available in the configuration file.
 
 ### Examples
 
-The examples folder contains some examples of how to use the bootstrap and implementing a simple state store for your application.
+The `examples` folder contains some examples of how to use the bootstrap and implementing a simple state store for your application.
 
+## Finite State Machine
+
+A new package `github.com/birchwood-langham/bootstrap/pkg/fsm` is available with a simple framework for creating and running finite state machines. An example of how to use the Finite State Machine
+is available in the `examples` folder under the turnstile project. This project creates a simple turnstile that has two states, Locked and Unlocked and
+two events, insert coin and push. 
+
+Each state will act differently depending on which event they receive. When locked, pushing the turnstile will 
+result in an error asking for a coin, while inserting a coin will transition to the Unlocked state. 
+
+When unlocked, pushing the turnstile will transition you back to the Locked state, and inserting a coin will result
+in an error telling you it has returned your coin.
+
+The State interface is defined as:
+
+```go
+package fsm
+
+import (
+	"github.com/google/uuid"
+)
+
+type State interface {
+	// ID is the unique identifier of the state so different states of the same nature
+	// can be distinguishable
+	ID() uuid.UUID
+	// Description of the state
+	Description() string
+	// Execute processes the event that is passed to is
+	Execute(Event) error
+	// Next checks the current state and determines what state it should transition to
+	Next() State
+	// WithTransitions sets the transitions that are supported by each state
+	WithTransitions(...Transition) State
+}
+```
+
+While the Event interface is defined as:
+
+```go
+package fsm
+
+import (
+	"github.com/google/uuid"
+)
+
+type Event interface {
+	// ID is a unique identifier for the event
+	ID() uuid.UUID
+	// Source is a unique identifier used to determine where the event came from
+	Source() string
+	// Name of the event
+	Name() string
+	// Timestamp is the time of the event as nanoseconds past epoch
+	Timestamp() int64
+}
+
+```
+
+Once you have defined your own states and events implementing these interfaces, you can create a state machine to pass 
+your events to.
+
+```go
+machine, errCh := fsm.New(uuid.New(), "Name of state machine", myInitialState)
+```
+
+The new function returns a state machine, and a channel where it will publish errors that occur within the state machine.
+
+Create a channel where events will be passed to the state machine, and a context that can be cancelled to terminate the machine
+if necessary, then run in a separate go routine using the state machines Run function.
+
+```go
+machineCtx, cancel := context.WithCancel(context.Background())
+eventCh := make(chan fsm.Event)
+
+go machine.Run(machineCtx, eventCh)
+```
+
+The example also provides an example of how to model transitions from one state to another, using the `Transition` struct and the
+`CheckFn` and `NextFn` function types.
+
+They are defined as:
+
+```go
+type CheckFn func (fsm.State) bool
+type NextFn func (fsm.State) fsm.State
+```
