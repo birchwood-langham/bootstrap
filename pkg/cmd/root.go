@@ -36,6 +36,20 @@ func startService(cmd *cobra.Command, args []string) {
 		log.Fatal("could not initialize the application", zap.Error(err))
 	}
 
+	if app.RunFunction() != nil {
+		if err := app.RunFunction()(ctx, state); err != nil {
+			log.Error("Command failed", zap.Error(err))
+		}
+
+		if err := app.Cleanup(state); err != nil {
+			log.Fatal("could not execute cleanup", zap.Error(err))
+		}
+
+		return
+	}
+
+	log.Info("Starting service. Ctrl-C to terminate")
+
 	signalCh := make(chan os.Signal, 1)
 	signal.Notify(signalCh, syscall.SIGINT, syscall.SIGTERM)
 

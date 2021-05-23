@@ -20,7 +20,7 @@ var syncer zapcore.WriteSyncer
 var core zapcore.Core
 var log *zap.Logger
 
-var CoreNotInitializedError error = errors.New("Zap core has not been initialized")
+var CoreNotInitializedError error = errors.New("zap core has not been initialized")
 
 func ZapConfig() zapcore.EncoderConfig {
 	encoderConfig := zap.NewProductionEncoderConfig()
@@ -116,4 +116,10 @@ func ApplicationLogLevel() zapcore.Level {
 	}
 
 	return level
+}
+
+// Logger logger will create a new logger with the configured application log level
+// and lumberjack logger if one doesn't exist, or return the created logger if it has
+func Logger() *zap.Logger {
+	return Get(ApplicationLogLevel(), ConfiguredLumberjackLogger())
 }
