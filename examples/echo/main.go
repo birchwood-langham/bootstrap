@@ -29,8 +29,6 @@ var state *echoState
 func initHttp(ctx context.Context, state service.StateStore) error {
 	log := logger.New(logger.ApplicationLogLevel(), logger.ConfiguredLumberjackLogger())
 
-	log.Info("Starting server")
-
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID, middleware.RealIP, middleware.Logger, middleware.Recoverer, middleware.Timeout(time.Minute))
 
